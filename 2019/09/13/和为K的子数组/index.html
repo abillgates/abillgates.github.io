@@ -95,18 +95,18 @@
 
 
 
-  <meta name="description" content="算法原理原题地址leetcode 526 优美的排列 回溯法经典的全排列问题，使用回溯法。关键是依据题意进行剪枝操作，统计符合题目要求的排列的数量。">
-<meta name="keywords" content="算法,C++">
+  <meta name="description" content="算法原理题目描述leetcode 560 和为k的子数组 前缀和&amp;amp;哈希表对于这种题目，很容易一眼就看到暴力穷举的办法，但是可以依据通过避免暴力搜索中的重复计算来优化算法。">
+<meta name="keywords" content="算法,C++,哈希表">
 <meta property="og:type" content="article">
-<meta property="og:title" content="LeetCode 526. 优美的排列">
-<meta property="og:url" content="http://yoursite.com/2019/09/11/LeetCode-526-优美的排列/index.html">
+<meta property="og:title" content="LeetCode 560. 和为K的子数组">
+<meta property="og:url" content="http://yoursite.com/2019/09/13/和为K的子数组/index.html">
 <meta property="og:site_name" content="Pengpeng&#39;s Blog">
-<meta property="og:description" content="算法原理原题地址leetcode 526 优美的排列 回溯法经典的全排列问题，使用回溯法。关键是依据题意进行剪枝操作，统计符合题目要求的排列的数量。">
+<meta property="og:description" content="算法原理题目描述leetcode 560 和为k的子数组 前缀和&amp;amp;哈希表对于这种题目，很容易一眼就看到暴力穷举的办法，但是可以依据通过避免暴力搜索中的重复计算来优化算法。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-09-12T12:47:55.724Z">
+<meta property="og:updated_time" content="2019-09-13T03:56:30.229Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="LeetCode 526. 优美的排列">
-<meta name="twitter:description" content="算法原理原题地址leetcode 526 优美的排列 回溯法经典的全排列问题，使用回溯法。关键是依据题意进行剪枝操作，统计符合题目要求的排列的数量。">
+<meta name="twitter:title" content="LeetCode 560. 和为K的子数组">
+<meta name="twitter:description" content="算法原理题目描述leetcode 560 和为k的子数组 前缀和&amp;amp;哈希表对于这种题目，很容易一眼就看到暴力穷举的办法，但是可以依据通过避免暴力搜索中的重复计算来优化算法。">
 
 
 
@@ -114,7 +114,7 @@
 
   
   
-  <link rel="canonical" href="http://yoursite.com/2019/09/11/LeetCode-526-优美的排列/">
+  <link rel="canonical" href="http://yoursite.com/2019/09/13/和为K的子数组/">
 
 
 
@@ -124,7 +124,7 @@
   };
 </script>
 
-  <title>LeetCode 526. 优美的排列 | Pengpeng's Blog</title>
+  <title>LeetCode 560. 和为K的子数组 | Pengpeng's Blog</title>
   
 
 
@@ -310,7 +310,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/09/11/LeetCode-526-优美的排列/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/09/13/和为K的子数组/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Peng Peng">
@@ -327,7 +327,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">LeetCode 526. 优美的排列
+          <h1 class="post-title" itemprop="name headline">LeetCode 560. 和为K的子数组
 
               
             
@@ -353,24 +353,12 @@
                 
               
 
-              <time title="创建时间：2019-09-11 20:10:40" itemprop="dateCreated datePublished" datetime="2019-09-11T20:10:40+08:00">2019-09-11</time>
+              <time title="创建时间：2019-09-13 11:25:08 / 修改时间：11:56:30" itemprop="dateCreated datePublished" datetime="2019-09-13T11:25:08+08:00">2019-09-13</time>
             
 
             
               
 
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2019-09-12 20:47:55" itemprop="dateModified" datetime="2019-09-12T20:47:55+08:00">2019-09-12</time>
               
             
           </span>
@@ -422,10 +410,12 @@
       
 
       
-        <h3 id="算法原理"><a href="#算法原理" class="headerlink" title="算法原理"></a>算法原理</h3><h4 id="原题地址"><a href="#原题地址" class="headerlink" title="原题地址"></a>原题地址</h4><p><a href="https://leetcode-cn.com/problems/beautiful-arrangement/" target="_blank" rel="noopener">leetcode 526 优美的排列</a></p>
-<h4 id="回溯法"><a href="#回溯法" class="headerlink" title="回溯法"></a>回溯法</h4><p>经典的全排列问题，使用回溯法。关键是依据题意进行剪枝操作，统计符合题目要求的排列的数量。<a id="more"></a>题目中是对从1到N的N个数字生成排列，那么我们使用一个for循环进行元素的筛选；同时，元素不能重复使用，因此使用一个<code>bool</code>类型的<code>visited</code>数组来标记元素是否被访问；另外，我们使用一个<code>pos</code>变量来记录生成的排列中元素的数量，当<code>pos</code>大于题目中的N时，说明已经完成一组N个元素的一个排列，此时符合条件的元素的数目加一。</p>
-<p>具体实现C++代码如下所示。</p>
-<h3 id="C-代码"><a href="#C-代码" class="headerlink" title="C++代码"></a>C++代码</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">countArrangement</span><span class="params">(<span class="keyword">int</span> N)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> res=<span class="number">0</span>;</span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">bool</span>&gt; visited(N+<span class="number">1</span>,<span class="literal">false</span>);</span><br><span class="line">        dfs(N,<span class="number">1</span>,res,visited);</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> N,<span class="keyword">int</span> pos,<span class="keyword">int</span>&amp; res,<span class="built_in">vector</span>&lt;<span class="keyword">bool</span>&gt; visited)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(pos&gt;N)&#123;</span><br><span class="line">            res++;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=N;i++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(!visited[i]&amp;&amp;(i%pos==<span class="number">0</span>||pos%i==<span class="number">0</span>))&#123;</span><br><span class="line">                visited[i]=<span class="literal">true</span>;</span><br><span class="line">                dfs(N,pos+<span class="number">1</span>,res,visited);</span><br><span class="line">                visited[i]=<span class="literal">false</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+        <h3 id="算法原理"><a href="#算法原理" class="headerlink" title="算法原理"></a>算法原理</h3><h4 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h4><p><a href="https://leetcode-cn.com/problems/subarray-sum-equals-k/" target="_blank" rel="noopener">leetcode 560 和为k的子数组</a></p>
+<h4 id="前缀和-amp-哈希表"><a href="#前缀和-amp-哈希表" class="headerlink" title="前缀和&amp;哈希表"></a>前缀和&amp;哈希表</h4><p>对于这种题目，很容易一眼就看到暴力穷举的办法，但是可以依据通过避免暴力搜索中的重复计算来优化算法。<a id="more"></a>可以使用对数组累加求和的方法来减少重复的累加。但是在此基础上，使用<code>hash</code>表可以在一次搜索的情况下完成统计。</p>
+<p>因此，使用一个<code>map</code>来统计所有的索引的累加和以及相同的累加和出现的次数，通过遍历数组不断的找到新的累加和，并且在<code>hash</code>表中创建对应的条目，如果该和已经存在，那么我们增加该和的计数。在统计新出现的累加和的同时，确定<code>sum-k</code>和出现的次数，因为新的累加和减去<code>sum-k</code>就是和为k的子数组，将该和出现的次数加入到总的符合题目要求的子数组的数目中去。</p>
+<p>另外这里有一点需要注意的是，因为可能数组的累加和本身就等于k，因此我们需要初始化<code>map</code>设置和为0的元素的数目为1。</p>
+<p>具体的实现代码如下所示。</p>
+<h3 id="C-代码"><a href="#C-代码" class="headerlink" title="C++代码"></a>C++代码</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="function"><span class="keyword">int</span> <span class="title">subarraySum</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums, <span class="keyword">int</span> k)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">int</span> n = nums.size();</span><br><span class="line">		<span class="built_in">unordered_map</span>&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt; m;</span><br><span class="line">		<span class="keyword">int</span> res = <span class="number">0</span>;</span><br><span class="line">        <span class="comment">// 需要考虑数组前缀和本身值为k的情况</span></span><br><span class="line">		m[<span class="number">0</span>] = <span class="number">1</span>;</span><br><span class="line">		<span class="keyword">int</span> sum = <span class="number">0</span>;</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">			sum = sum + nums[i];</span><br><span class="line">			<span class="keyword">if</span> (m.find(sum - k) != m.end()) &#123;</span><br><span class="line">				res++;</span><br><span class="line">			&#125;</span><br><span class="line">			m[sum]++;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> res;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -453,6 +443,8 @@
           
             <a href="/tags/C/" rel="tag"># C++</a>
           
+            <a href="/tags/哈希表/" rel="tag"># 哈希表</a>
+          
         </div>
       
 
@@ -464,8 +456,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/04/25/My-First-Blog/" rel="next" title="My First Blog">
-                <i class="fa fa-chevron-left"></i> My First Blog
+              <a href="/2019/09/11/LeetCode-526-优美的排列/" rel="next" title="LeetCode 526. 优美的排列">
+                <i class="fa fa-chevron-left"></i> LeetCode 526. 优美的排列
               </a>
             
           </div>
@@ -473,10 +465,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/09/13/和为K的子数组/" rel="prev" title="LeetCode 560. 和为K的子数组">
-                LeetCode 560. 和为K的子数组 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -632,7 +620,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#算法原理"><span class="nav-number">1.</span> <span class="nav-text">算法原理</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#原题地址"><span class="nav-number">1.1.</span> <span class="nav-text">原题地址</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#回溯法"><span class="nav-number">1.2.</span> <span class="nav-text">回溯法</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#C-代码"><span class="nav-number">2.</span> <span class="nav-text">C++代码</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#算法原理"><span class="nav-number">1.</span> <span class="nav-text">算法原理</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#题目描述"><span class="nav-number">1.1.</span> <span class="nav-text">题目描述</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#前缀和-amp-哈希表"><span class="nav-number">1.2.</span> <span class="nav-text">前缀和&amp;哈希表</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#C-代码"><span class="nav-number">2.</span> <span class="nav-text">C++代码</span></a></li></ol></div>
             
 
           </div>
@@ -798,7 +786,7 @@
   
     <script>
   window.livereOptions = {
-    refer: '2019/09/11/LeetCode-526-优美的排列/'
+    refer: '2019/09/13/和为K的子数组/'
   };
   (function(d, s) {
     var j, e = d.getElementsByTagName(s)[0];
