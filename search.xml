@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title><![CDATA[LeetCode 560. 和为K的子数组]]></title>
+    <url>%2F2019%2F09%2F13%2F%E5%92%8C%E4%B8%BAK%E7%9A%84%E5%AD%90%E6%95%B0%E7%BB%84%2F</url>
+    <content type="text"><![CDATA[算法原理题目描述leetcode 560 和为k的子数组 前缀和&amp;哈希表对于这种题目，很容易一眼就看到暴力穷举的办法，但是可以依据通过避免暴力搜索中的重复计算来优化算法。可以使用对数组累加求和的方法来减少重复的累加。但是在此基础上，使用hash表可以在一次搜索的情况下完成统计。 因此，使用一个map来统计所有的索引的累加和以及相同的累加和出现的次数，通过遍历数组不断的找到新的累加和，并且在hash表中创建对应的条目，如果该和已经存在，那么我们增加该和的计数。在统计新出现的累加和的同时，确定sum-k和出现的次数，因为新的累加和减去sum-k就是和为k的子数组，将该和出现的次数加入到总的符合题目要求的子数组的数目中去。 另外这里有一点需要注意的是，因为可能数组的累加和本身就等于k，因此我们需要初始化map设置和为0的元素的数目为1。 具体的实现代码如下所示。 C++代码12345678910111213141516171819class Solution &#123;public: int subarraySum(vector&lt;int&gt;&amp; nums, int k) &#123; int n = nums.size(); unordered_map&lt;int, int&gt; m; int res = 0; // 需要考虑数组前缀和本身值为k的情况 m[0] = 1; int sum = 0; for (int i = 0; i &lt; n; i++) &#123; sum = sum + nums[i]; if (m.find(sum - k) != m.end()) &#123; res++; &#125; m[sum]++; &#125; return res; &#125;&#125;;]]></content>
+      <categories>
+        <category>leetcode</category>
+      </categories>
+      <tags>
+        <tag>算法</tag>
+        <tag>C++</tag>
+        <tag>哈希表</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[LeetCode 526. 优美的排列]]></title>
+    <url>%2F2019%2F09%2F11%2FLeetCode-526-%E4%BC%98%E7%BE%8E%E7%9A%84%E6%8E%92%E5%88%97%2F</url>
+    <content type="text"><![CDATA[算法原理原题地址leetcode 526 优美的排列 回溯法经典的全排列问题，使用回溯法。关键是依据题意进行剪枝操作，统计符合题目要求的排列的数量。题目中是对从1到N的N个数字生成排列，那么我们使用一个for循环进行元素的筛选；同时，元素不能重复使用，因此使用一个bool类型的visited数组来标记元素是否被访问；另外，我们使用一个pos变量来记录生成的排列中元素的数量，当pos大于题目中的N时，说明已经完成一组N个元素的一个排列，此时符合条件的元素的数目加一。 具体实现C++代码如下所示。 C++代码123456789101112131415161718192021222324class Solution &#123;public: int countArrangement(int N) &#123; int res=0; vector&lt;bool&gt; visited(N+1,false); dfs(N,1,res,visited); return res; &#125;private: void dfs(int N,int pos,int&amp; res,vector&lt;bool&gt; visited)&#123; if(pos&gt;N)&#123; res++; return; &#125; for(int i=1;i&lt;=N;i++)&#123; if(!visited[i]&amp;&amp;(i%pos==0||pos%i==0))&#123; visited[i]=true; dfs(N,pos+1,res,visited); visited[i]=false; &#125; &#125; &#125;&#125;;]]></content>
+      <categories>
+        <category>leetcode</category>
+      </categories>
+      <tags>
+        <tag>算法</tag>
+        <tag>C++</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[My First Blog]]></title>
+    <url>%2F2019%2F04%2F25%2FMy-First-Blog%2F</url>
+    <content type="text"><![CDATA[This is my first blog that i have edit,i’m very glad to edit it though i unfamiliar with the markdown grammar,yes,i can just write without format. say whati love huimin!]]></content>
+  </entry>
+  <entry>
+    <title><![CDATA[Hello World]]></title>
+    <url>%2F2019%2F04%2F24%2Fhello-world%2F</url>
+    <content type="text"><![CDATA[Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick Start From HereCreate a new post method1$ hexo new "My New Post" More info: Writing Run server1$ hexo server More info: Server Generate static files1$ hexo generate More info: Generating Deploy to remote sites1$ hexo deploy More info: Deployment]]></content>
+  </entry>
+</search>
