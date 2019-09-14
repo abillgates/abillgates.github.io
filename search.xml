@@ -3,7 +3,7 @@
   <entry>
     <title><![CDATA[LeetCode 1185. 一周中的第几天]]></title>
     <url>%2F2019%2F09%2F14%2F%E4%B8%80%E5%91%A8%E4%B8%AD%E7%9A%84%E7%AC%AC%E5%87%A0%E5%A4%A9%2F</url>
-    <content type="text"><![CDATA[求解方法题目描述原文地址：leetcode 1185. 一周中的第几天 既然这道题要求我们给出指定时间范围内的某一天的具体是星期几，我们想到的解决办法无外乎是找到一个基准，然后统计需要计算的日期与这个基准之间的天数。通过计算出来的天数加上这个基准的星期几对7取余即可得到所求的日期是一周中的哪一天。 具体的实现则是，定义一个返回数组，通过求到数返回这个数组索引所指向的表示星期几的字符串。题目中说日期是从1970年开始，那么不妨选择1969年12月31日作为我们的基准线，这样十分方便中间间隔天数的统计计算。这一天是星期三，初始化total变量为3，还需要一个判断平年闰年的函数，以确定我们需要加上366天还是365天，当统计到题目中给出的年份时，注意如果所给月份大于2还要判断该年是平年还是闰年，以确定2月份是加上28天还是29天。 具体C++实现代码如下。 C++代码1234567891011121314151617181920212223class Solution &#123;public: string dayOfTheWeek(int day, int month, int year) &#123; const char* weekday[7] = &#123; "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday" &#125;; int monthday[13] = &#123; 0,31,28,31,30,31,30,31,31,30,31,30,31 &#125;; int tol_day = 3; for (int i = 1970; i &lt; year; i++) &#123; tol_day = tol_day + (isLeap(i) ? 366 : 365); &#125; for (int i = 1; i &lt; month; i++) &#123; if (i == 2 &amp;&amp; isLeap(year)) tol_day = tol_day + 29; else tol_day = tol_day + monthday[i]; &#125; return weekday[(tol_day + day) % 7]; &#125;private: bool isLeap(int year) &#123; return year % 400 == 0 || (year % 100 != 0 &amp;&amp; year % 4 == 0); &#125;&#125;;]]></content>
+    <content type="text"><![CDATA[实现方法题目描述原文地址：leetcode 1185. 一周中的第几天 方法既然这道题要求我们给出指定时间范围内的某一天的具体是星期几，我们想到的解决办法无外乎是找到一个基准，然后统计需要计算的日期与这个基准之间的天数。通过计算出来的天数加上这个基准的星期几对7取余即可得到所求的日期是一周中的哪一天。 具体的实现则是，定义一个返回数组，通过求到数返回这个数组索引所指向的表示星期几的字符串。题目中说日期是从1970年开始，那么不妨选择1969年12月31日作为我们的基准线，这样十分方便中间间隔天数的统计计算。这一天是星期三，初始化total变量为3，还需要一个判断平年闰年的函数，以确定我们需要加上366天还是365天，当统计到题目中给出的年份时，注意如果所给月份大于2还要判断该年是平年还是闰年，以确定2月份是加上28天还是29天。 具体C++实现代码如下。 C++代码1234567891011121314151617181920212223class Solution &#123;public: string dayOfTheWeek(int day, int month, int year) &#123; const char* weekday[7] = &#123; "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday" &#125;; int monthday[13] = &#123; 0,31,28,31,30,31,30,31,31,30,31,30,31 &#125;; int tol_day = 3; for (int i = 1970; i &lt; year; i++) &#123; tol_day = tol_day + (isLeap(i) ? 366 : 365); &#125; for (int i = 1; i &lt; month; i++) &#123; if (i == 2 &amp;&amp; isLeap(year)) tol_day = tol_day + 29; else tol_day = tol_day + monthday[i]; &#125; return weekday[(tol_day + day) % 7]; &#125;private: bool isLeap(int year) &#123; return year % 400 == 0 || (year % 100 != 0 &amp;&amp; year % 4 == 0); &#125;&#125;;]]></content>
       <categories>
         <category>leetcode</category>
       </categories>
@@ -19,8 +19,8 @@
         <category>leetcode</category>
       </categories>
       <tags>
-        <tag>C++</tag>
         <tag>算法</tag>
+        <tag>C++</tag>
         <tag>哈希表</tag>
       </tags>
   </entry>
@@ -32,8 +32,8 @@
         <category>leetcode</category>
       </categories>
       <tags>
-        <tag>C++</tag>
         <tag>算法</tag>
+        <tag>C++</tag>
       </tags>
   </entry>
   <entry>
