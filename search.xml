@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[LeetCode 1185. 一周中的第几天]]></title>
+    <url>%2F2019%2F09%2F14%2F%E4%B8%80%E5%91%A8%E4%B8%AD%E7%9A%84%E7%AC%AC%E5%87%A0%E5%A4%A9%2F</url>
+    <content type="text"><![CDATA[求解方法题目描述原文地址：leetcode 1185. 一周中的第几天 既然这道题要求我们给出指定时间范围内的某一天的具体是星期几，我们想到的解决办法无外乎是找到一个基准，然后统计需要计算的日期与这个基准之间的天数。通过计算出来的天数加上这个基准的星期几对7取余即可得到所求的日期是一周中的哪一天。 具体的实现则是，定义一个返回数组，通过求到数返回这个数组索引所指向的表示星期几的字符串。题目中说日期是从1970年开始，那么不妨选择1969年12月31日作为我们的基准线，这样十分方便中间间隔天数的统计计算。这一天是星期三，初始化total变量为3，还需要一个判断平年闰年的函数，以确定我们需要加上366天还是365天，当统计到题目中给出的年份时，注意如果所给月份大于2还要判断该年是平年还是闰年，以确定2月份是加上28天还是29天。 具体C++实现代码如下。 C++代码1234567891011121314151617181920212223class Solution &#123;public: string dayOfTheWeek(int day, int month, int year) &#123; const char* weekday[7] = &#123; "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday" &#125;; int monthday[13] = &#123; 0,31,28,31,30,31,30,31,31,30,31,30,31 &#125;; int tol_day = 3; for (int i = 1970; i &lt; year; i++) &#123; tol_day = tol_day + (isLeap(i) ? 366 : 365); &#125; for (int i = 1; i &lt; month; i++) &#123; if (i == 2 &amp;&amp; isLeap(year)) tol_day = tol_day + 29; else tol_day = tol_day + monthday[i]; &#125; return weekday[(tol_day + day) % 7]; &#125;private: bool isLeap(int year) &#123; return year % 400 == 0 || (year % 100 != 0 &amp;&amp; year % 4 == 0); &#125;&#125;;]]></content>
+      <categories>
+        <category>leetcode</category>
+      </categories>
+      <tags>
+        <tag>C++</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[LeetCode 560. 和为K的子数组]]></title>
     <url>%2F2019%2F09%2F13%2F%E5%92%8C%E4%B8%BAK%E7%9A%84%E5%AD%90%E6%95%B0%E7%BB%84%2F</url>
     <content type="text"><![CDATA[算法原理题目描述leetcode 560 和为k的子数组 前缀和&amp;哈希表对于这种题目，很容易一眼就看到暴力穷举的办法，但是可以依据通过避免暴力搜索中的重复计算来优化算法。可以使用对数组累加求和的方法来减少重复的累加。但是在此基础上，使用hash表可以在一次搜索的情况下完成统计。 因此，使用一个map来统计所有的索引的累加和以及相同的累加和出现的次数，通过遍历数组不断的找到新的累加和，并且在hash表中创建对应的条目，如果该和已经存在，那么我们增加该和的计数。在统计新出现的累加和的同时，确定sum-k和出现的次数，因为新的累加和减去sum-k就是和为k的子数组，将该和出现的次数加入到总的符合题目要求的子数组的数目中去。 另外这里有一点需要注意的是，因为可能数组的累加和本身就等于k，因此我们需要初始化map设置和为0的元素的数目为1。 具体的实现代码如下所示。 C++代码12345678910111213141516171819class Solution &#123;public: int subarraySum(vector&lt;int&gt;&amp; nums, int k) &#123; int n = nums.size(); unordered_map&lt;int, int&gt; m; int res = 0; // 需要考虑数组前缀和本身值为k的情况 m[0] = 1; int sum = 0; for (int i = 0; i &lt; n; i++) &#123; sum = sum + nums[i]; if (m.find(sum - k) != m.end()) &#123; res++; &#125; m[sum]++; &#125; return res; &#125;&#125;;]]></content>
@@ -8,8 +19,8 @@
         <category>leetcode</category>
       </categories>
       <tags>
-        <tag>算法</tag>
         <tag>C++</tag>
+        <tag>算法</tag>
         <tag>哈希表</tag>
       </tags>
   </entry>
@@ -21,8 +32,8 @@
         <category>leetcode</category>
       </categories>
       <tags>
-        <tag>算法</tag>
         <tag>C++</tag>
+        <tag>算法</tag>
       </tags>
   </entry>
   <entry>
